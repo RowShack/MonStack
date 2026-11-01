@@ -23,7 +23,7 @@ All the apps share one look, one sign-in model (users, roles, two-step sign-in),
 <!-- versions:start -->
 | App | Version | Download |
 |---|---|---|
-| FortiMon | 1.12.0 | [Download](https://github.com/RowShack/MonStack/releases/tag/fortimon-v1.12.0) |
+| FortiMon | 1.12.1 | [Download](https://github.com/RowShack/FortiMon/releases/tag/v1.12.1) |
 | UniMon | 0.1.2 | [Download](https://github.com/RowShack/MonStack/releases/tag/unimon-v0.1.2) |
 | MerakiMon | 0.1.3 | [Download](https://github.com/RowShack/MonStack/releases/tag/merakimon-v0.1.3) |
 | SiteMon | 0.1.1 | [Download](https://github.com/RowShack/MonStack/releases/tag/sitemon-v0.1.1) |
