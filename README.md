@@ -11,12 +11,23 @@ dashboard you run on your own server. No agents, no cloud service, and free to u
 | App | Watches | Status |
 |---|---|---|
 | **FortiMon** | Fortinet: FortiGate, FortiSwitch, FortiAP | **Available now** |
-| UniMon | Ubiquiti UniFi | Coming soon |
-| MerakiMon | Cisco Meraki | Coming soon |
-| SonicMon | SonicWall | Coming soon |
-| SiteMon | One wallboard across every MonStack app and site | Coming soon |
+| **UniMon** | Ubiquiti UniFi | **Available now** |
+| **MerakiMon** | Cisco Meraki | **Available now** |
+| SonicMon | SonicWall | Planned |
+| **SiteMon** | One wallboard across every MonStack app and site | **Available now** |
 
 All the apps share one look, one sign-in model (users, roles, two-step sign-in), alerts and the same signed updates.
+
+## Latest versions
+
+<!-- versions:start -->
+| App | Version | Download |
+|---|---|---|
+| FortiMon | 1.12.0 | [Download](https://github.com/RowShack/MonStack/releases/tag/fortimon-v1.12.0) |
+| UniMon | 0.1.2 | [Download](https://github.com/RowShack/MonStack/releases/tag/unimon-v0.1.2) |
+| MerakiMon | 0.1.3 | [Download](https://github.com/RowShack/MonStack/releases/tag/merakimon-v0.1.3) |
+| SiteMon | 0.1.1 | [Download](https://github.com/RowShack/MonStack/releases/tag/sitemon-v0.1.1) |
+<!-- versions:end -->
 
 ## FortiMon
 
