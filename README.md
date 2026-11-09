@@ -4,19 +4,65 @@
 network gear and show site health, problems with their likely cause, WAN links, devices and history, on a web
 dashboard you run on your own server. No agents, no cloud service, and free to use.
 
-![FortiMon: every site's health at a glance](docs/screenshots/hero-health-at-a-glance.jpg)
+Each app has its own repository with its guide, screenshots, releases and issue tracker. This page is the front door:
+what the apps are, how they fit together and which version is current.
 
 ## The apps
 
-| App | Watches | Status |
-|---|---|---|
-| **FortiMon** | Fortinet: FortiGate, FortiSwitch, FortiAP | **Available now** |
-| **UniMon** | Ubiquiti UniFi | **Available now** |
-| **MerakiMon** | Cisco Meraki | **Available now** |
-| SonicMon | SonicWall | Planned |
-| **SiteMon** | One wallboard across every MonStack app and site | **Available now** |
+| App | Watches | Status | Repository |
+|---|---|---|---|
+| **FortiMon** | Fortinet: FortiGate, FortiSwitch, FortiAP | Available | [RowShack/FortiMon](https://github.com/RowShack/FortiMon) |
+| **UniMon** | Ubiquiti UniFi | Available | UniMon repository coming soon |
+| **MerakiMon** | Cisco Meraki | Available | MerakiMon repository coming soon |
+| **SiteMon** | One wallboard across every MonStack app and site | Available | SiteMon repository coming soon |
+| SonicMon | SonicWall | Planned | - |
+
+### FortiMon
+
+Reads your FortiGates over the FortiOS REST API. Its diagnostics try to tell you whether something is really wrong and
+why: a 0-100 health score per site, problems with evidence and a likely cause, an automatic network map, Wi-Fi,
+switches, SD-WAN, VPN and HA, licences and firmware, capacity forecasts, configuration changes and alerts.
+
+### UniMon
+
+Reads your UniFi consoles through their read-only API keys (and optionally the UniFi Site Manager): site health,
+devices, Wi-Fi, WAN and the issues that need attention.
+
+### MerakiMon
+
+Reads your Meraki organisations through a read-only Dashboard API key. Each Meraki network is one site, with its
+security appliances, switches, access points, internet links, firmware and licences.
+
+### SiteMon
+
+A wallboard for a TV. It never talks to network gear: it shows a tile per site, from every app, with its status, score
+and top problem.
+
+### SonicMon
+
+Planned. Nothing is built or promised yet.
 
 All the apps share one look, one sign-in model (users, roles, two-step sign-in), alerts and the same signed updates.
+Some features are not yet checked on real gear; each app's page says which.
+
+## How it fits together
+
+Each app watches its own vendor. Every app also offers the same small summary of its sites, the *card* (contract v1, a
+read-only JSON document with a status, score, headline, WAN links and top problems per site). SiteMon either pulls the
+cards from the apps it can reach or receives them from apps that push them, and draws one wallboard.
+
+```mermaid
+flowchart LR
+    F[FortiGate, FortiSwitch, FortiAP] -->|FortiOS API| FM[FortiMon]
+    U[UniFi consoles] -->|read-only API key| UM[UniMon]
+    M[Meraki Dashboard] -->|read-only API key| MM[MerakiMon]
+    FM -->|card v1| SM[SiteMon wallboard]
+    UM -->|card v1| SM
+    MM -->|card v1| SM
+```
+
+Pull and push use the same card. Pull needs SiteMon to reach the app and an API key from that app; push is for apps
+SiteMon cannot reach, and uses a key issued by SiteMon. You can use MonStack apps on their own: SiteMon is optional.
 
 ## Latest versions
 
@@ -29,90 +75,30 @@ All the apps share one look, one sign-in model (users, roles, two-step sign-in),
 | SiteMon | 0.1.1 | [Download](https://github.com/RowShack/MonStack/releases/tag/sitemon-v0.1.1) |
 <!-- versions:end -->
 
-## FortiMon
+Each app moves to its own repository for releases as it is set up. Until then its release is listed on this
+repository's [releases page](https://github.com/RowShack/MonStack/releases).
 
-FortiMon reads your FortiGates over the FortiOS REST API and serves a live dashboard. Its diagnostics try to tell you
-whether something is **really** wrong, and why, instead of alerting on every blip.
+## Roadmap
 
-![The network map, drawn automatically](docs/screenshots/hero-network-map.jpg)
-
-- **Health at a glance.** A 0-100 health score and a plain-language verdict for every site, with the worst problem first.
-- **Problems with a cause.** Each issue shows its evidence, the likely cause, related Fortinet known issues and a
-  recommended fix. If both internet links drop at once, it reports one shared cause, not two ISP faults.
-- **An automatic network map** of internet links, firewalls, switches, access points and other devices.
-- **Wi-Fi, switches and WAN.** Every client's experience score, FortiSwitch faceplates with port speed, PoE and errors,
-  SD-WAN SLA, throughput and DHCP pool use.
-- **VPN and HA.** IPsec tunnels, dial-up users and the HA pair, including failovers.
-- **Licences, firmware and advisories.** Expiry dates, firmware status and the Fortinet security advisories that apply to you.
-- **Capacity forecasts.** When DHCP pools, WAN links, PoE or the firewall will run out.
-- **Configuration changes** for the last 30 days: who changed what, when, with old and new values.
-- **Alerts** to Microsoft Teams, webhooks and email, grouped so they don't flood a channel, plus scheduled reports.
-- **A NOC wallboard** for a TV, many sites, users with roles, two-step sign-in, backup and restore.
-- **Demo mode** with three simulated sites, so you can look around without a FortiGate.
-
-See [more screenshots and the full user guide](docs/fortimon.md).
-
-## Requirements
-
-- A **Windows** server (64-bit), or a **Linux** server with systemd and Python 3.9 or newer (Ubuntu, Debian, RHEL, Rocky
-  and similar). Windows includes everything it needs.
-- A REST API token for each FortiGate (the guide shows how to make one and test it).
-- A web browser. FortiMon serves its dashboard over HTTPS, on port 8443 by default.
-
-## Install
-
-Download the newest files from the [latest release](../../releases/latest).
-
-### Windows
-
-1. Download `FortiMon-<version>.msi` and `SHA256SUMS.txt`.
-2. Check the download (see below).
-3. Double-click the MSI and answer the questions: run as a Windows service (recommended), who may open the web
-   interface, and the port. At the end it opens FortiMon in your browser, where you create the first admin account.
-
-For a silent install: `msiexec /i FortiMon-<version>.msi /qn MODE=service ACCESS=all PORT=8443`.
-
-**Windows may warn you.** The installer isn't signed with a paid code-signing certificate yet, so SmartScreen can show
-"Windows protected your PC". Check the SHA-256 below first. If it matches, choose **More info**, then **Run anyway**.
-
-### Linux
-
-```
-sudo sh fortimon-<version>-linux.run
-```
-
-It asks whether to install a systemd service (recommended), the port, whether other computers may connect and whether to
-open the firewall. For no questions, add `--unattended --service --port 8443`.
-
-### Check the download
-
-Each release lists `SHA256SUMS.txt`. The checksum of your file must match its line there.
-
-```
-# Windows (PowerShell)
-Get-FileHash .\FortiMon-<version>.msi -Algorithm SHA256
-
-# Linux
-sha256sum -c SHA256SUMS.txt --ignore-missing
-```
-
-The in-app updater goes further: it only accepts releases signed with MonStack's own key, which is built into the app.
+- **Now:** FortiMon has its own repository. UniMon, MerakiMon and SiteMon follow, one at a time.
+- **Next:** SonicMon for SonicWall.
+- **Not yet checked on real gear:** parts of MerakiMon (VPN & HA, Network Map, Find Device), UniMon with several sites
+  on one console, and SiteMon with all apps side by side.
 
 ## Updates
 
-FortiMon looks at this page once a day (*Settings > Updates*), shows what's new and, for a service install, can update
-itself with **Update now**: it backs up your data, installs the new version, checks it answers and goes back to the old
-version by itself if it doesn't. Servers without internet access can use the *offline update* file from the release.
-No account or token is needed.
-
-Versions **before 1.11.1** looked at an older page, so install 1.11.1 once by running its installer over the top. Your
-data and settings are kept.
+Apps update themselves from *Settings > Updates*: they look for a new release once a day, show what is new and, for a
+service install, update with **Update now**. They back up your data first and go back to the old version by
+themselves if the new one doesn't answer. The updater only accepts packages signed with MonStack's own key, which is
+built into each app. No account or token is needed. Checksums are listed with every release (`SHA256SUMS.txt`).
 
 ## Help and feedback
 
-- **Questions, bugs and ideas:** [open an issue](../../issues/new/choose). Please give the version and your operating
-  system, and never paste tokens, passwords, configuration files or customer data.
-- **Security problems:** please don't use public issues. See [SECURITY.md](SECURITY.md) to report them privately.
+Issues are off on this page. Questions, bugs and ideas go to the app's own repository: for now
+[FortiMon](https://github.com/RowShack/FortiMon/issues/new/choose); the others will have theirs when they move. Please
+give the version and your operating system, and never paste tokens, passwords, configuration files or customer data.
+
+**Security problems:** please don't use public issues. See [SECURITY.md](SECURITY.md) to report them privately.
 
 ## Licence
 
