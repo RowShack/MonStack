@@ -71,7 +71,7 @@ SiteMon cannot reach, and uses a key issued by SiteMon. You can use MonStack app
 |---|---|---|
 | FortiMon | 1.13.0 | [Download](https://github.com/RowShack/FortiMon/releases/tag/v1.13.0) |
 | UniMon | 0.1.2 | [Download](https://github.com/RowShack/MonStack/releases/tag/unimon-v0.1.2) |
-| MerakiMon | 0.1.3 | [Download](https://github.com/RowShack/MonStack/releases/tag/merakimon-v0.1.3) |
+| MerakiMon | 0.2.0 | [Download](https://github.com/RowShack/MonStack/releases/tag/merakimon-v0.2.0) |
 | SiteMon | 0.1.1 | [Download](https://github.com/RowShack/MonStack/releases/tag/sitemon-v0.1.1) |
 <!-- versions:end -->
 
