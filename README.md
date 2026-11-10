@@ -13,7 +13,7 @@ what the apps are, how they fit together and which version is current.
 |---|---|---|---|
 | **FortiMon** | Fortinet: FortiGate, FortiSwitch, FortiAP | Available | [RowShack/FortiMon](https://github.com/RowShack/FortiMon) |
 | **UniMon** | Ubiquiti UniFi | Available | UniMon repository coming soon |
-| **MerakiMon** | Cisco Meraki | Available | MerakiMon repository coming soon |
+| **MerakiMon** | Cisco Meraki | Available | [RowShack/MerakiMon](https://github.com/RowShack/MerakiMon) |
 | **SiteMon** | One wallboard across every MonStack app and site | Available | SiteMon repository coming soon |
 | SonicMon | SonicWall | Planned | - |
 
@@ -71,7 +71,7 @@ SiteMon cannot reach, and uses a key issued by SiteMon. You can use MonStack app
 |---|---|---|
 | FortiMon | 1.13.0 | [Download](https://github.com/RowShack/FortiMon/releases/tag/v1.13.0) |
 | UniMon | 0.1.2 | [Download](https://github.com/RowShack/MonStack/releases/tag/unimon-v0.1.2) |
-| MerakiMon | 0.2.0 | [Download](https://github.com/RowShack/MonStack/releases/tag/merakimon-v0.2.0) |
+| MerakiMon | 0.2.1 | [Download](https://github.com/RowShack/MerakiMon/releases/tag/v0.2.1) |
 | SiteMon | 0.1.1 | [Download](https://github.com/RowShack/MonStack/releases/tag/sitemon-v0.1.1) |
 <!-- versions:end -->
 
@@ -80,7 +80,7 @@ repository's [releases page](https://github.com/RowShack/MonStack/releases).
 
 ## Roadmap
 
-- **Now:** FortiMon has its own repository. UniMon, MerakiMon and SiteMon follow, one at a time.
+- **Now:** FortiMon and MerakiMon have their own repositories. UniMon and SiteMon follow, one at a time.
 - **Next:** SonicMon for SonicWall.
 - **Not yet checked on real gear:** parts of MerakiMon (VPN & HA, Network Map, Find Device), UniMon with several sites
   on one console, and SiteMon with all apps side by side.
