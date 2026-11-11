@@ -70,7 +70,7 @@ SiteMon cannot reach, and uses a key issued by SiteMon. You can use MonStack app
 | App | Version | Download |
 |---|---|---|
 | FortiMon | 1.13.0 | [Download](https://github.com/RowShack/FortiMon/releases/tag/v1.13.0) |
-| UniMon | 0.1.2 | [Download](https://github.com/RowShack/MonStack/releases/tag/unimon-v0.1.2) |
+| UniMon | 0.2.0 | [Download](https://github.com/RowShack/MonStack/releases/tag/unimon-v0.2.0) |
 | MerakiMon | 0.2.1 | [Download](https://github.com/RowShack/MerakiMon/releases/tag/v0.2.1) |
 | SiteMon | 0.2.1 | [Download](https://github.com/RowShack/SiteMon/releases/tag/v0.2.1) |
 <!-- versions:end -->
