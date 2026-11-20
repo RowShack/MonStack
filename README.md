@@ -15,6 +15,7 @@ what the apps are, how they fit together and which version is current.
 | **UniMon** | Ubiquiti UniFi | Available | [RowShack/UniMon](https://github.com/RowShack/UniMon) |
 | **MerakiMon** | Cisco Meraki | Available | [RowShack/MerakiMon](https://github.com/RowShack/MerakiMon) |
 | **SiteMon** | One wallboard across every MonStack app and site | Available | [RowShack/SiteMon](https://github.com/RowShack/SiteMon) |
+| **ServerMon** | Windows servers, Active Directory and Linux servers | Available | [RowShack/ServerMon](https://github.com/RowShack/ServerMon) |
 | SonicMon | SonicWall | Planned | - |
 
 ### FortiMon
@@ -38,6 +39,12 @@ security appliances, switches, access points, internet links, firmware and licen
 A wallboard for a TV. It never talks to network gear: it shows a tile per site, from every app, with its status, score
 and top problem.
 
+### ServerMon
+
+Reads your Windows servers, Active Directory and Linux servers with read-only accounts you make for it: replication,
+accounts and policy, Group Policy, disks, patching, certificates and Linux basics over SSH. Every script it runs is fixed
+and only reads. Parts are not yet checked in every setup (see Roadmap).
+
 ### SonicMon
 
 Planned. Nothing is built or promised yet.
@@ -56,9 +63,11 @@ flowchart LR
     F[FortiGate, FortiSwitch, FortiAP] -->|FortiOS API| FM[FortiMon]
     U[UniFi consoles] -->|read-only API key| UM[UniMon]
     M[Meraki Dashboard] -->|read-only API key| MM[MerakiMon]
+    W[Windows, Active Directory, Linux servers] -->|WinRM, LDAP, SSH, read-only| SV[ServerMon]
     FM -->|card v1| SM[SiteMon wallboard]
     UM -->|card v1| SM
     MM -->|card v1| SM
+    SV -->|card v1| SM
 ```
 
 Pull and push use the same card. Pull needs SiteMon to reach the app and an API key from that app; push is for apps
@@ -73,6 +82,7 @@ SiteMon cannot reach, and uses a key issued by SiteMon. You can use MonStack app
 | UniMon | 0.3.0 | [Download](https://github.com/RowShack/UniMon/releases/tag/v0.3.0) |
 | MerakiMon | 0.3.2 | [Download](https://github.com/RowShack/MerakiMon/releases/tag/v0.3.2) |
 | SiteMon | 0.2.1 | [Download](https://github.com/RowShack/SiteMon/releases/tag/v0.2.1) |
+| ServerMon | 0.1.0 | [Download](https://github.com/RowShack/ServerMon/releases/tag/v0.1.0) |
 <!-- versions:end -->
 
 Each app moves to its own repository for releases as it is set up. Until then its release is listed on this
@@ -80,10 +90,11 @@ repository's [releases page](https://github.com/RowShack/MonStack/releases).
 
 ## Roadmap
 
-- **Now:** FortiMon, UniMon, MerakiMon and SiteMon each have their own repository.
+- **Now:** FortiMon, UniMon, MerakiMon, SiteMon and ServerMon each have their own repository.
 - **Next:** SonicMon for SonicWall.
 - **Not yet checked on real gear:** parts of MerakiMon (VPN & HA, Network Map, Find Device), UniMon with several sites
-  on one console, and SiteMon with all apps side by side.
+  on one console, SiteMon with all apps side by side, and ServerMon's installers and Windows service end to end, Linux over
+  a real SSH connection and the Security log on Windows Server 2019 domain controllers.
 
 ## Updates
 
